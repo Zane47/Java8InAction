@@ -16,6 +16,7 @@ public class ShopMain {
     doSomethingElse();
     // while the price of the product is being calculated
     try {
+        // 从Future对象中读取价格，如果价格未知，会发生阻塞
         double price = futurePrice.get();
         System.out.printf("Price is %.2f%n", price);
     } catch (ExecutionException | InterruptedException e) {
