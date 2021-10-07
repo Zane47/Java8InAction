@@ -26,7 +26,8 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <!--<version>4.11</version>-->
+      <version>4.10</version>
     </dependency>
   </dependencies>
 
@@ -37,8 +38,12 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
+          <!--
           <source>1.9</source>
           <target>1.9</target>
+          -->
+          <source>9</source>
+          <target>9</target>
         </configuration>
       </plugin>
       <plugin>
