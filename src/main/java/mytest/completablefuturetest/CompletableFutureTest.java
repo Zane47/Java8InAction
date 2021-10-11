@@ -9,7 +9,7 @@ public class CompletableFutureTest {
     public static void main(String[] args) {
         try {
             // 1.test
-            // test1();
+            test1();
 
             // 2. 处理(thenApply / thenApplyAsync)
             //test2();
