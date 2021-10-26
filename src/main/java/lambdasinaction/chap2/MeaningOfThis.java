@@ -19,6 +19,7 @@ public class MeaningOfThis {
 
     public static void main(String... args) {
         MeaningOfThis m = new MeaningOfThis();
-        m.doIt(); // ???
+        m.doIt(); // ??? 这一行的输出是什么？
+        // output: 5, 因为this指的是包含它的Runnable，而不是外面的类MeaningOfThis。
     }
 }
