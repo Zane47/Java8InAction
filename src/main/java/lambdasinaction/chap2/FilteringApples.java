@@ -2,6 +2,9 @@ package lambdasinaction.chap2;
 
 import java.util.*;
 
+/**
+ * 行为参数化
+ */
 public class FilteringApples {
 
     public static void main(String... args) {
@@ -11,6 +14,7 @@ public class FilteringApples {
             new Apple(155, "green"),
             new Apple(120, "red"));
 
+        // 1. 区分苹果的颜色
         // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
         List<Apple> greenApples = filterApplesByColor(inventory, "green");
         System.out.println(greenApples);
@@ -19,6 +23,8 @@ public class FilteringApples {
         List<Apple> redApples = filterApplesByColor(inventory, "red");
         System.out.println(redApples);
 
+        // 2.区分苹果的重量(filterApplesByWeight)
+        // 但是可以发现, 这个和1很相似.打破了DRY（ Don’t Repeat Yourself，不要重复自己）的软件工程原则
         // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
         List<Apple> greenApples2 = filter(inventory, new AppleColorPredicate());
         System.out.println(greenApples2);
@@ -72,7 +78,9 @@ public class FilteringApples {
         return result;
     }
 
-
+    /**
+     * 接收行为为参数
+     */
     public static List<Apple> filter(List<Apple> inventory, ApplePredicate p) {
         List<Apple> result = new ArrayList<>();
         for (Apple apple : inventory) {
@@ -81,6 +89,34 @@ public class FilteringApples {
             }
         }
         return result;
+    }
+
+
+
+    interface ApplePredicate {
+        public boolean test(Apple a);
+    }
+
+    static class AppleWeightPredicate implements ApplePredicate {
+        @Override
+        public boolean test(Apple apple) {
+            return apple.getWeight() > 150;
+        }
+    }
+
+    static class AppleColorPredicate implements ApplePredicate {
+        @Override
+        public boolean test(Apple apple) {
+            return "green".equals(apple.getColor());
+        }
+    }
+
+    static class AppleRedAndHeavyPredicate implements ApplePredicate {
+        @Override
+        public boolean test(Apple apple) {
+            return "red".equals(apple.getColor())
+                && apple.getWeight() > 150;
+        }
     }
 
     public static class Apple {
@@ -114,32 +150,6 @@ public class FilteringApples {
                 "color='" + color + '\'' +
                 ", weight=" + weight +
                 '}';
-        }
-    }
-
-    interface ApplePredicate {
-        public boolean test(Apple a);
-    }
-
-    static class AppleWeightPredicate implements ApplePredicate {
-        @Override
-        public boolean test(Apple apple) {
-            return apple.getWeight() > 150;
-        }
-    }
-
-    static class AppleColorPredicate implements ApplePredicate {
-        @Override
-        public boolean test(Apple apple) {
-            return "green".equals(apple.getColor());
-        }
-    }
-
-    static class AppleRedAndHeavyPredicate implements ApplePredicate {
-        @Override
-        public boolean test(Apple apple) {
-            return "red".equals(apple.getColor())
-                && apple.getWeight() > 150;
         }
     }
 }
