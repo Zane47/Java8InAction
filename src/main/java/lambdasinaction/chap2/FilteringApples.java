@@ -108,6 +108,7 @@ public class FilteringApples {
             this.color = color;
         }
 
+        @Override
         public String toString() {
             return "Apple{" +
                 "color='" + color + '\'' +
