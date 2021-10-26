@@ -38,6 +38,7 @@ public class FilteringApples {
         System.out.println(redAndHeavyApples);
 
         // [Apple{color='red', weight=120}]
+        // 匿名类 -> 编译器提示 "replace with lambda"
         List<Apple> redApples2 = filter(inventory, new ApplePredicate() {
             @Override
             public boolean test(Apple a) {
