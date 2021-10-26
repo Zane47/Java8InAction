@@ -45,6 +45,9 @@ public class FilteringApples {
                 return a.getColor().equals("red");
             }
         });
+
+        List<Apple> redApples3 = filter(inventory, a -> a.getColor().equals("red"));
+
         System.out.println(redApples2);
 
     }
