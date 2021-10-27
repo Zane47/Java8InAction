@@ -3,7 +3,7 @@ package lambdasinaction.chap2;
 import java.util.*;
 
 /**
- * 行为参数化
+ * 行为参数化与值参数化, p30
  */
 public class FilteringApples {
 
@@ -46,11 +46,35 @@ public class FilteringApples {
             }
         });
 
-        List<Apple> redApples3 = filter(inventory, a -> a.getColor().equals("red"));
+        // lambda
+        List<Apple> redApples3 = filter(inventory, (Apple apple) -> "red".equals(apple.getColor()));
 
         System.out.println(redApples2);
 
+
+        // p31 7th尝试: 将list类型抽象化, lambda中写boolean test(T t)
+        List<Apple> filter = filter(inventory, (Apple apple) -> "red".equals(apple.getColor()));
+
+        List<Integer> integerList = Arrays.asList(1, 2);
+        List<Integer> filter1 = filter(integerList, (Integer i) -> i % 2 == 0);
+
+
     }
+
+    public interface Predicate<T> {
+        boolean test(T t);
+    }
+
+    public static <T> List<T> filter(List<T> list, Predicate<T> p) {
+        List<T> result = new ArrayList<>();
+        for (T t : list) {
+            if (p.test(t)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
 
     public static List<Apple> filterGreenApples(List<Apple> inventory) {
         List<Apple> result = new ArrayList<>();
@@ -123,6 +147,9 @@ public class FilteringApples {
         }
     }
 
+    /**
+     * class Apple
+     */
     public static class Apple {
         private int weight = 0;
         private String color = "";
